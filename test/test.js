@@ -10,16 +10,11 @@ const output = new ConsoleOutput() // ouput in Console.
 // const OutputPath = __dirname + '/out.log'
 // const output = new FileOutput(OutputPath)
 
-// 
-// const output = new ConsoleOutput() 
 
-
- 
-const htmlSEOcheck = new htmlCheck(true)
+const htmlSEOcheck = new htmlCheck()
 htmlSEOcheck.setInput(input)
 htmlSEOcheck.setOutput(output)
- 
+
 htmlSEOcheck.run().then(function(result){
          htmlSEOcheck.getResult()
 })
-

@@ -25,8 +25,8 @@ II. Node Readable Stream
 ```js
 const fs = require('fs')
 const StreamInput = require('htmlseoscan')
-const stream = fs.createReadStream(filePath)
-const input = new StreamInput(stream)
+const readstream = fs.createReadStream(filePath)
+const input = new StreamInput(readstream)
 ```
 
 ## Result output
@@ -39,28 +39,110 @@ const output = new FileOutput(outputPath)
 ```
 
 II. Node Writable Stream
-
+```js
+const fs = require('fs')
+const StreamOutput = require('htmlseoscan')
+const writestream = fs.createWriteStream(filePath)
+const output = new StreamOutput(writestream)
+```
 
 III. Console
-
-
-
-
-## Pre-defined SEO rules
-1. Detect if any <img /> tag without alt attribute
-
 ```js
-const {CheckTagNoAttr} = require('htmlseoscan')
-CheckTagNoAttr('', 'img', 'alt')
+const fs = require('fs')
+const ConsoleOutput = require('htmlseoscan')
+const output = new ConsoleOutput()
 ```
 
 
+## Pre-defined SEO rules
+
+```js
+const htmlCheck = require('htmlseoscan')
+const htmlSEOcheck = new htmlCheck()
+htmlSEOcheck.setInput(input)
+htmlSEOcheck.setOutput(output)
+htmlSEOcheck.run().then(function(result){
+         htmlSEOcheck.getResult()
+})
+
+```
+
+1. Detect if any `<img />` tag without alt attribute
+```js
+htmlSEOcheck.selectdefaultRule([1])
+```
 
 
-2. Detect if any <a /> tag without rel attribute
-3. In <head> tag
-i. Detect if header doesn’t have <title> tag
-ii. Detect if header doesn’t have <meta name=“descriptions” ... /> tag
-iii. Detect if header doesn’t have <meta name=“keywords” ... /> tag
-4. Detect if there’re more than 15 <strong> tag in HTML (15 is a value should be configurable by user)
-5. Detect if a HTML have more than one <H1> tag. 
+2. Detect if any `<a />` tag without rel attribute
+```js
+htmlSEOcheck.selectdefaultRule([2])
+```
+
+3. In` <head>` tag
+i. Detect if header doesn’t have `<title>` tag
+ii. Detect if header doesn’t have `<meta name=“descriptions” ... />` tag
+iii. Detect if header doesn’t have `<meta name=“keywords” ... />` tag
+```js
+htmlSEOcheck.selectdefaultRule([3])
+```
+
+
+4. Detect if there’re more than 15 `<strong>` tag in HTML (15 is a value should be configurable by user)
+```js
+htmlSEOcheck.selectdefaultRule([4])
+
+// const CheckTagCount = require('htmlseoscan')
+// htmlSEOcheck.CustomerRule([new CheckTagCount('', 'strong', 15)])
+
+```
+
+5. Detect if a HTML have more than one `<H1>` tag. 
+```js
+htmlSEOcheck.selectdefaultRule([5])
+
+// const CheckTagCount = require('htmlseoscan')
+// htmlSEOcheck.CustomerRule([new CheckTagCount('', 'h1', 1)])
+
+```
+
+
+## Example Output
+1. they can only use the rule 1 and 4.
+```js
+const { htmlCheck, FileInput, ConsoleOutput} = require('htmlseoscan')
+const InputPath = __dirname + '/test.html' // input local file path 
+const input = new FileInput(InputPath)
+const output = new ConsoleOutput() // ouput in Console.
+
+htmlSEOcheck.setInput(input)
+htmlSEOcheck.setOutput(output)
+htmlSEOcheck.selectdefaultRule([1, 4])
+
+htmlSEOcheck.run().then(function(result){
+         htmlSEOcheck.getResult()
+})
+```
+<img  src="https://raw.githubusercontent.com/EddieYY/htmlSEOscan/master/img/example1.png">
+
+
+
+2. Showing all of the defects for rules that user apply, following is a simple output demo when a user apply above 5 rules.
+```js
+const { htmlCheck, FileInput, ConsoleOutput} = require('htmlseoscan')
+const InputPath = __dirname + '/test.html' // input local file path 
+const input = new FileInput(InputPath)
+const output = new ConsoleOutput() // ouput in Console.
+
+htmlSEOcheck.setInput(input)
+htmlSEOcheck.setOutput(output)
+
+htmlSEOcheck.run().then(function(result){
+         htmlSEOcheck.getResult()
+})
+```
+<img  src="https://raw.githubusercontent.com/EddieYY/htmlSEOscan/master/img/example2.png">
+
+
+
+
+

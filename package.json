@@ -1,6 +1,6 @@
 {
   "name": "htmlseoscan",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Node.js package to let user can use this package to scan a HTML file and show all of the SEO defects.",
   "main": "index.js",
   "directories": {

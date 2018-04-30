@@ -242,7 +242,6 @@ module.exports = {
 	CheckExistTag: CheckExistTag,
 	CheckTagNoAttrValue: CheckTagNoAttrValue,
 	CheckTagCount: CheckTagCount,
-	CheckTagCount: ConsoleOutput,
 	ConsoleOutput: ConsoleOutput,
 	FileOutput: FileOutput,
 	StreamOutput: StreamOutput,

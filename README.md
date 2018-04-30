@@ -125,8 +125,29 @@ htmlSEOcheck.run().then(function(result){
 <img  src="https://raw.githubusercontent.com/EddieYY/htmlSEOscan/master/img/example1.png">
 
 
+2. Checking <meta name=“robots” /> existing or not?
+```js
+const { htmlCheck, FileInput, ConsoleOutput, FileOutput, CheckTagNoAttrValu } = require('htmlseoscan')
 
-2. Showing all of the defects for rules that user apply, following is a simple output demo when a user apply above 5 rules.
+const InputPath = __dirname + '/test.html' // input local file path 
+const input = new FileInput(InputPath)
+
+const output = new ConsoleOutput() // ouput in Console.
+
+const htmlSEOcheck = new htmlCheck(false)
+htmlSEOcheck.setInput(input)
+htmlSEOcheck.setOutput(output)
+//Checking <meta name=“robots” /> existing or not
+htmlSEOcheck.CustomerRule([new CheckTagNoAttrValue('head', 'meta', 'name', 'robots')])
+htmlSEOcheck.run().then(function(result){
+         htmlSEOcheck.getResult()
+})
+
+//SEO defects found:
+//This HTML without <meta name="robots"> tag.
+```
+
+3. Showing all of the defects for rules that user apply, following is a simple output demo when a user apply above 5 rules.
 ```js
 const { htmlCheck, FileInput, ConsoleOutput} = require('htmlseoscan')
 const InputPath = __dirname + '/test.html' // input local file path 
@@ -143,6 +164,26 @@ htmlSEOcheck.run().then(function(result){
 <img  src="https://raw.githubusercontent.com/EddieYY/htmlSEOscan/master/img/example2.png">
 
 
+## User can define and use their own rules easily.
+Please follow this check rule structure:
+```js
+const CheckRule  = require('htmlseoscan')
 
+class NewCheckRule extends CheckRule {
+	constructor(rootag, parameters...) {
+		super(rootag)
+	     	...
+	   }
 
+	check() {
+		// check rule
+	 	this.isCheck = true // or false
+	   }
+
+	err() {
+		return !this.isCheck ? "Error message" : ""
+	} 
+}
+```
+Then, add this rule in htmlCheck function. ex:`htmlSEOcheck.CustomerRule([new NewCheckRule(rootag, parameters...)])`
 

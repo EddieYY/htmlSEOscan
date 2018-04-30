@@ -1,7 +1,7 @@
 {
-  "name": "htmlSEOscan",
-  "version": "1.0.0",
-  "description": "",
+  "name": "htmlseoscan",
+  "version": "1.0.1",
+  "description": "A Node.js package to let user can use this package to scan a HTML file and show all of the SEO defects.",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -11,13 +11,13 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "mocha test/test.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/EddieYY/htmlSEOscan.git"
   },
-  "keywords": [],
+  "keywords": ["seo"],
   "author": "EddieYY_Chen <yenyu03042gmail.com>",
   "license": "ISC",
   "bugs": {

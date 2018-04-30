@@ -1,4 +1,5 @@
 const { htmlCheck, FileInput, StreamInput, ConsoleOutput, FileOutput, StreamOutput } = require('../src/package')
+//const { htmlCheck, FileInput, StreamInput, ConsoleOutput, FileOutput, StreamOutput } = require('htmlseoscan')
  
 
 const InputPath = __dirname + '/test.html' // input local file path 

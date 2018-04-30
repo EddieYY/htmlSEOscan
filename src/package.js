@@ -184,7 +184,7 @@ class htmlCheck {
 				[new CheckExistTag('', 'title'), 
 				 new CheckTagNoAttrValue('head', 'meta', 'name', 'description'), 
 				 new CheckTagNoAttrValue('head', 'meta', 'name', 'keywords')], 
-				[new CheckTagCount('', 'strong', 0)],
+				[new CheckTagCount('', 'strong', 15)],
 				[new CheckTagCount('', 'h1', 1)]
 			]
 		}else{

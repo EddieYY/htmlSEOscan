@@ -122,7 +122,7 @@ htmlSEOcheck.run().then(function(result){
          htmlSEOcheck.getResult()
 })
 ```
-<img  src="https://raw.githubusercontent.com/EddieYY/htmlSEOscan/master/img/example1.png" width="100%">
+<img  src="https://raw.githubusercontent.com/EddieYY/htmlSEOscan/master/img/example1.png">
 
 
 2. Checking `<meta name="robots" />` existing or not?
@@ -161,7 +161,7 @@ htmlSEOcheck.run().then(function(result){
          htmlSEOcheck.getResult()
 })
 ```
-<img  src="https://raw.githubusercontent.com/EddieYY/htmlSEOscan/master/img/example2.png" width="50%">
+<img  src="https://raw.githubusercontent.com/EddieYY/htmlSEOscan/master/img/example2.png">
 
 
 ## User can define and use their own rules easily.

@@ -125,7 +125,7 @@ htmlSEOcheck.run().then(function(result){
 <img  src="https://raw.githubusercontent.com/EddieYY/htmlSEOscan/master/img/example1.png">
 
 
-2. Checking <meta name=“robots” /> existing or not?
+2. Checking `<meta name="robots" />` existing or not?
 ```js
 const { htmlCheck, FileInput, ConsoleOutput, FileOutput, CheckTagNoAttrValu } = require('htmlseoscan')
 
@@ -137,7 +137,7 @@ const output = new ConsoleOutput() // ouput in Console.
 const htmlSEOcheck = new htmlCheck(false)
 htmlSEOcheck.setInput(input)
 htmlSEOcheck.setOutput(output)
-//Checking <meta name=“robots” /> existing or not
+//Checking <meta name="robots" /> existing or not
 htmlSEOcheck.CustomerRule([new CheckTagNoAttrValue('head', 'meta', 'name', 'robots')])
 htmlSEOcheck.run().then(function(result){
          htmlSEOcheck.getResult()
@@ -185,5 +185,6 @@ class NewCheckRule extends CheckRule {
 	} 
 }
 ```
-Then, add this rule in htmlCheck function. ex:`htmlSEOcheck.CustomerRule([new NewCheckRule(rootag, parameters...)])`
+Then, add this rule in htmlCheck function.<br/> 
+ex:`htmlSEOcheck.CustomerRule([new NewCheckRule(rootag, parameters...)])`
 

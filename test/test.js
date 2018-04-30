@@ -7,13 +7,13 @@ const OutputPath = __dirname + '/out.log'
 const input = new FileInput(InputPath)
 const output = new ConsoleOutput()
  
-const htmlSEOheck = new htmlCheck(true)
+const htmlSEOcheck = new htmlCheck(true)
  
-htmlSEOheck.setInput(input)
-htmlSEOheck.setOutput(output)
+htmlSEOcheck.setInput(input)
+htmlSEOcheck.setOutput(output)
  
-htmlSEOheck.run().then(function(result){
-         htmlSEOheck.getResult()
+htmlSEOcheck.run().then(function(result){
+         htmlSEOcheck.getResult()
 })
 
 

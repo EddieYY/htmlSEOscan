@@ -78,10 +78,10 @@ htmlSEOcheck.selectdefaultRule([1])
 htmlSEOcheck.selectdefaultRule([2])
 ```
 
-3. In` <head>` tag
-i. Detect if header doesn’t have `<title>` tag
-ii. Detect if header doesn’t have `<meta name=“descriptions” ... />` tag
-iii. Detect if header doesn’t have `<meta name=“keywords” ... />` tag
+3. In` <head>` tag <br/>
+i. Detect if header doesn’t have `<title>` tag <br/>
+ii. Detect if header doesn’t have `<meta name=“descriptions” ... />` tag <br/>
+iii. Detect if header doesn’t have `<meta name=“keywords” ... />` tag <br/>
 ```js
 htmlSEOcheck.selectdefaultRule([3])
 ```
@@ -107,7 +107,7 @@ htmlSEOcheck.selectdefaultRule([5])
 
 
 ## Example Output
-1. they can only use the rule 1 and 4.
+1. Only use the rule 1 and 4.
 ```js
 const { htmlCheck, FileInput, ConsoleOutput} = require('htmlseoscan')
 const InputPath = __dirname + '/test.html' // input local file path 
@@ -169,6 +169,7 @@ Please follow this check rule structure:
 ```js
 const CheckRule  = require('htmlseoscan')
 
+//define new check rule
 class NewCheckRule extends CheckRule {
 	constructor(rootag, parameters...) {
 		super(rootag)

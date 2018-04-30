@@ -1,4 +1,3 @@
-//'use strict'
 const fs = require('fs')
 const cheerio = require('cheerio')
 
@@ -49,8 +48,6 @@ class StreamInput {
 }
 
 
-
-
 /*define check rule */
 class CheckRule {
 	constructor(rootag) {
@@ -99,7 +96,6 @@ class CheckExistTag extends CheckRule {
 	}
 }
 
-
 class CheckTagNoAttrValue extends CheckRule {
 	constructor(rootag, tag, attr, value) {
 		super(rootag)
@@ -115,7 +111,6 @@ class CheckTagNoAttrValue extends CheckRule {
 	}
 }
 
-
 class CheckTagCount extends CheckRule {
 	constructor(rootag, tag, count) {
 		super(rootag)
@@ -129,7 +124,6 @@ class CheckTagCount extends CheckRule {
 		return !this.isCheck ? "This HTML have more than "+ this.count +  " <"+ this.tag + ">" + " tag." : ""
 	}
 }
-
 
 //output
 class ConsoleOutput {
@@ -177,84 +171,81 @@ class StreamOutput {
 }
 
 class htmlCheck {
-	constructor(defaultRule){
+	constructor(defaultRule = true){
 		this.input = null
 		this.output = null
 		this.dom = null
 		this.err = []
-		this.select = []
+		//this.select = []
 		if(defaultRule){
 			this.rules = [
-				["new CheckTagNoAttr('', 'img', 'alt')"],
-				["new CheckTagNoAttr('', 'a', 'rel')" ,"2"]
+				[new CheckTagNoAttr('', 'img', 'alt')],
+				[new CheckTagNoAttr('', 'a', 'rel')],
+				[new CheckExistTag('', 'title'), 
+				 new CheckTagNoAttrValue('head', 'meta', 'name', 'description'), 
+				 new CheckTagNoAttrValue('head', 'meta', 'name', 'keywords')], 
+				[new CheckTagCount('', 'strong', 0)],
+				[new CheckTagCount('', 'h1', 1)]
 			]
 		}else{
 			this.rules = []
 		}
 	}
 	selectdefaultRule(indexes){
+		this.select = []
+		indexes.forEach(i => {
+			this.select.push(this.rules[i-1])
+		})
+		this.rules = this.select 
+	}
 
-		//this.select = []
-		indexes.forEach(i => { 
-		this.rules[i-1]	&& this.rules[i-1].forEach(
-				j => {this.select.push(j)
-				})})
+	setInput(input) {
+		this.input = input
 	}
-	
-	pprint(){
-		console.log(this.select);
+
+	setOutput(output) {
+		this.output = output
 	}
-	
+
+	CustomerRule(rule) {
+		rule && this.rules.push(rule)
+	}
+
+	async run() {
+		const data = await this.input.read();
+		this.dom = cheerio.load(data);
+		console.log(data);
+		this.rules.forEach((Rule) => {
+			//console.log(Rule);
+			Rule.forEach(rule=>{
+				rule.setDom(this.dom)
+				rule.check()
+				const error = rule.err()
+				error && this.err.push(error)
+			})
+		})
+	}
+	async getResult() {
+		//console.log(this.output);
+		this.output.data = this.err.length ?  "SEO defects found:" + "\n" + this.err.join("\r\n") : "This HTML not any SEO defects found."
+		await this.output.write()
+	}
+
 
 }
 
-const p = new htmlCheck(true)//selectdefaultRule([0, 1])
-p.selectdefaultRule([1, 2])
-console.log(p)
-/*module.exports = {
-	FileInput,
-	StreamInput,
-	CheckRule,
-	CheckTagNoAttr,
-    	CheckExistTag,
-	CheckTagNoAttrValue,
-	CheckTagCount,
-	ConsoleOutput,
-	FileOutput,
-	StreamOutput
-}
-*/
-
-/*
-const Path = __dirname + '/index.html'
-//const input = new FileInput(Path)
-
-//const data = input.read();
-const stream = fs.createReadStream(Path)
-const result = new StreamInput(stream)
-
-//data.then(function(result) {
-//const RuleExistTag()
-	const dom = cheerio.load(result);
-	//const rule  = new CheckTagNoAttr('', 'img', 'alt')
-	//const rule  = new CheckTagNoAttr('', 'a', 'rel')
-	//const rule  = new CheckExistTag('', 'title')
-	//const rule  = new CheckTagNoAttrValue('head', 'meta', 'name', 'description')
-	//const rule  = new CheckTagNoAttrValue('head', 'meta', 'name', 'keywords')
-	const rule  = new CheckTagCount('', 'h1', 1)
-	rule.setDom(dom);
-	rule.check();
-	const error = rule.err();
-	//const out = new ConsoleOutput(error)
-	//const out = new FileOutput(__dirname + '/out.txt', error)
-	const wstream = fs.createWriteStream(__dirname + '/result.log')
- 	const out = new StreamOutput(wstream, error)
-	const outt = out.write();
-	outt.then(function(result) {
-		console.log(result)
-	})
-	//console.log(error);
-//})*/
-//
-//
+module.exports = {
+	FileInput: FileInput,
+	StreamInput: StreamInput,
+	CheckRule: CheckRule,
+	CheckTagNoAttr: CheckTagNoAttr,
+	CheckExistTag: CheckExistTag,
+	CheckTagNoAttrValue: CheckTagNoAttrValue,
+	CheckTagCount: CheckTagCount,
+	CheckTagCount: ConsoleOutput,
+	ConsoleOutput: ConsoleOutput,
+	FileOutput: FileOutput,
+	StreamOutput: StreamOutput,
+	htmlCheck: htmlCheck
+};
 

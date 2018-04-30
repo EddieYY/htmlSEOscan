@@ -1,0 +1,27 @@
+{
+  "name": "htmlSEOscan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EddieYY/htmlSEOscan.git"
+  },
+  "keywords": [],
+  "author": "EddieYY_Chen <yenyu03042gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EddieYY/htmlSEOscan/issues"
+  },
+  "homepage": "https://github.com/EddieYY/htmlSEOscan#readme"
+}

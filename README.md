@@ -122,7 +122,7 @@ htmlSEOcheck.run().then(function(result){
          htmlSEOcheck.getResult()
 })
 ```
-<img  src="https://raw.githubusercontent.com/EddieYY/htmlSEOscan/master/img/example1.png" height="100">
+<img  src="https://raw.githubusercontent.com/EddieYY/htmlSEOscan/master/img/example1.png" height="100%">
 
 
 2. Checking `<meta name="robots" />` existing or not?
